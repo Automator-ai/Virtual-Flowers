@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>A Little Charm for You</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #f8fafc;
+  }
+
+  .flower {
+    position: absolute;
+    top: -50px;
+    font-size: 24px;
+    animation: fall linear forwards;
+    opacity: 0.9;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .message {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 2s ease;
+  }
+
+  .card {
+    background: rgba(2, 6, 23, 0.85);
+    padding: 32px 28px;
+    border-radius: 18px;
+    max-width: 420px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  .signature {
+    margin-top: 18px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<div id="message" class="message">
+  <div class="card">
+    <h1>Just a Little Something 🌸</h1>
+    <p>
+      Careful… I think my <strong>charms</strong> might be addictive.
+    </p>
+    <div class="signature">— from someone a little enchanted</div>
+  </div>
+</div>
+
+<script>
+  const flowers = ["🌸","🌷","🌹","💐","🌺"];
+  const duration = 4500;
+  const interval = 120;
+
+  function createFlower() {
+    const flower = document.createElement("div");
+    flower.className = "flower";
+    flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.fontSize = 20 + Math.random() * 20 + "px";
+    flower.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 5000);
+  }
+
+  const rain = setInterval(createFlower, interval);
+
+  setTimeout(() => {
+    clearInterval(rain);
+    document.getElementById("message").style.opacity = 1;
+  }, duration);
+</script>
+
+</body>
+</html>
